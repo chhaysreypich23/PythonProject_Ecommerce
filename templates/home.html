@@ -1,0 +1,47 @@
+{% extends "master.html" %} {% block main_content %} {% if error %}
+<center>
+  <h3>{{ error }}</h3>
+</center>
+{% endif %}
+
+<div class="row">
+  <div
+    class="col-lg-3 col-md-3 col-sm-12"
+    v-for="item in products"
+    :key="item.id"
+  >
+    <div class="product-card">
+      <span class="badge badge-pill badge-info pro-cat"
+        >[[ item.category ]]</span
+      >
+      <img
+        style="height: 200px; object-fit: contain"
+        :src="'/static/uploads/' + item.image"
+        :alt="item.name"
+      />
+      <div class="product-card-body">
+        <div>
+            <div class="product-card-title product-title">[[ item.name ]]</div>
+            <a
+                :href="'/detail/' + item.id"
+                style="cursor: pointer; text-decoration: underline; color: #186e95"
+                >
+                see more
+            </a>
+        </div>
+
+        <div class="product-card-footer mt-2">
+            <span class="product-card-price text-danger">$[[ item.price ]]</span>
+        </div>
+
+        <button
+             @click="addToCart(item)"
+             class="btn btn-sm btn-outline-success mt-2 w-100"
+            >
+                 Add to Cart 🛒
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
